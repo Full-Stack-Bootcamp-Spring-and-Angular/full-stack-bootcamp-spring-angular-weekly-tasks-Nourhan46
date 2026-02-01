@@ -1,24 +1,37 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
+<head>
+    <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+</head>
 <body>
-<form action="process_data">
-    <h2>User Registration</h2>
+<form:form modelAttribute="user" action="process_data">
+    <h1>User Registration</h1>
 
-    <label for="firstName">First Name</label>
-    <input type="text" id="firstName" name="firstName" required>
+    FirstName<form:input path="firstname" />
+<form:errors path="firstname"/> <br>
+      LastName<form:input path="lastname" />
+  <form:errors path="lastname"/> <br>
 
-    <label for="lastName">Last Name</label>
-    <input type="text" id="lastName" name="lastName" required>
+        Email<form:input path="email" />
+      <form:errors path="email" /> <br>
 
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
+        Password<form:input path="password" type="password" />
 
-    <label for="dob">Date of Birth</label>
-    <input type="date" id="dob" name="dateOfBirth" required>
+        <form:errors path="password" cssClass="error"></form:errors> <br>
 
-    <label for="city">City</label>
-    <input type="text" id="city" name="city" required>
+        confirmPassword<form:input path="confirmPassword" type="password" />
+
+        <form:errors path="confirmPassword" cssClass="error"></form:errors> <br>
+
+
+        Date<form:input path="date" type="date" />
+      <form:errors path="date"/> <br>
+    City<form:input path="city" />
+      <form:errors path="city"/> <br>
+
 
     <button type="submit">Register</button>
-</form>
+</form:form>
 </body>
 </html>
