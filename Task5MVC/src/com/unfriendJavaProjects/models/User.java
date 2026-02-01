@@ -1,59 +1,40 @@
 package com.unfriendJavaProjects.models;
 
+import com.unfriendJavaProjects.specialAnnotation.ValidateConfirmPassword;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ValidateConfirmPassword(
+        field = "password",
+        fieldMatch = "confirmPassword",
+        message = "Passwords do not match!"
+)
 public class User {
+
+    @NotNull(message = "firstname can not be null")
     private String firstname;
+
+    @NotNull(message = "lastname can not be null")
     private String lastname;
+
+    @Email(message = "Email should be valid")
     private String email;
+
+    @NotNull(message = "Please select a date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+
+    @NotBlank(message = "Please enter your city")
     private String city;
 
-    public User(String firstname, String lastname, String email, LocalDate date, String city) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.date = date;
-        this.city = city;
-    }
+    @Pattern(regexp = "^[a-zA-Z0-9]{6,10}$")
+    private String password;
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
+    private String confirmPassword;
 }
